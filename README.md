@@ -1,6 +1,12 @@
 # Learning Pick-and-place
 
-In this repository, we've published the code for our publication [*Self-supervised Learning for Precise Pick-and-place without Object Model*](https://pantor.github.io/learning-pick-and-place/). As only parts of the code were specifically written for this publication, we introduce the code structure regarding the overall project idea.
+<p align="center">
+ We've released our easy-to-use Python package <b>Griffig</b>!<br>
+ You can find more information in its <a href="https://github.com/pantor/griffig">repository</a> and on the website <a href="https://griffig.xyz">griffig.xyz</a><br>
+<hr>
+</p>
+
+In this repository, we've published the code for our publication [*Self-supervised Learning for Precise Pick-and-place without Object Model*](https://pantor.github.io/learning-pick-and-place/) (RA-L 2020). As only parts of the code were specifically written for this publication, we introduce the code structure regarding the overall project idea.
 
 <p align="center">
  <a href="https://drive.google.com/file/d/16NdOv_DnqTnZuyejMnWwtg-25bPpuqwT/view?usp=sharing">
@@ -34,7 +40,7 @@ And all requirements for Python 3.6 via Pip and `python3.6 -m pip install -r req
 
 ## Start
 
-For an easy start, run `sh terminal-setup.sh` for a complete terminal setup. Start the mongodb daemon. Then run `roslaunch bin_picking moveit.launch`, `rosrun bin_picking grasping.py` and check the database server.
+First, start the mongodb daemon and the database server via `python3 database/app.py` afterwards. Then launch `roslaunch bin_picking realsense.launch` (or `ensenso.launch`) for bringing up the camera node and the MoveIt! node for the Franka Panda. Finally, run `rosrun bin_picking grasping.py` for moving the robot.
 
 
 ## Hyperparameters
