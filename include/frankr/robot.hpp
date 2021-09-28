@@ -15,9 +15,9 @@
 
 #include <geometry_msgs/WrenchStamped.h>
 #include <franka_msgs/FrankaState.h>
-#include <franka_control/ErrorRecoveryAction.h>
-#include <franka_control/ErrorRecoveryActionGoal.h>
-#include <franka_control/ErrorRecoveryGoal.h>
+// #include <franka_control/ErrorRecoveryAction.h>
+// #include <franka_control/ErrorRecoveryActionGoal.h>
+// #include <franka_control/ErrorRecoveryGoal.h>
 
 #include <frankr/geometry.hpp>
 #include <frankr/motion.hpp>
@@ -61,7 +61,7 @@ class Robot: RosNode, moveit::planning_interface::MoveGroupInterface {
     return future.get();
   }
 
-  actionlib::SimpleActionClient<franka_control::ErrorRecoveryAction> ac{"franka_control/error_recovery", true};
+  // actionlib::SimpleActionClient<franka_control::ErrorRecoveryAction> ac{"franka_control/error_recovery", true};
 
   void stateCallback(const franka_msgs::FrankaState& msg);
   void wrenchCallback(const geometry_msgs::WrenchStamped& msg);

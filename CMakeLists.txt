@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(bin_picking VERSION 0.1.0 LANGUAGES CXX)
+project(learning-pick-and-place VERSION 0.1.0 LANGUAGES CXX)
 
 
 option(GRASPRO_BUILD_ENSENSO_NODE "Build ensenso node." ON)
@@ -14,23 +14,23 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 set(Eigen3_DIRS "/usr/local/include/eigen3/")
-set(PYTHON_EXECUTABLE python3.6)
-set(PYTHON_LIBRARY "/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu/libpython3.6m.so")
+set(PYTHON_EXECUTABLE python3.8)
+set(PYTHON_LIBRARY "/usr/lib/python3.8/config-3.8m-x86_64-linux-gnu/libpython3.8m.so")
 
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(Eigen3 REQUIRED)
-find_package(OpenCV 3.3 REQUIRED)
+find_package(OpenCV 4.2.0 REQUIRED)
 find_package(pybind11 REQUIRED)
-find_package(Python 3.6 EXACT REQUIRED)
-find_package(Franka 0.7.1 EXACT REQUIRED)
+find_package(Python 3 EXACT REQUIRED)
+find_package(Franka 0.8.0 EXACT REQUIRED)
 
 
-if(GRASPRO_BUILD_ENSENSO_NODE)
-  find_package(Ensenso 2.2 REQUIRED)
-endif()
+#if(GRASPRO_BUILD_ENSENSO_NODE)
+#  find_package(Ensenso 2.2 REQUIRED)
+#endif()
 
 
 if(GRASPRO_BUILD_REALSENSE_NODE)
@@ -117,9 +117,9 @@ target_link_libraries(ros INTERFACE ${catkin_LIBRARIES})
 add_dependencies(ros ${catkin_EXPORTED_TARGETS})
 
 
-pybind11_add_module(orthographical src/orthographic_image/python.cpp)
-target_include_directories(orthographical PRIVATE ${Eigen3_DIRS})
-target_link_libraries(orthographical PRIVATE ${OpenCV_LIBS})
+#pybind11_add_module(orthographical src/orthographic_image/python.cpp)
+#target_include_directories(orthographical PRIVATE ${Eigen3_DIRS})
+#target_link_libraries(orthographical PRIVATE ${OpenCV_LIBS})
 
 
 add_library(frankr src/frankr/robot.cpp src/frankr/gripper.cpp)
@@ -130,14 +130,14 @@ pybind11_add_module(cfrankr src/frankr/python.cpp)
 target_link_libraries(cfrankr PUBLIC frankr)
 
 
-if(GRASPRO_BUILD_ENSENSO_NODE)
-  add_library(ensenso src/ensenso/ensenso.cpp)
-  target_include_directories(ensenso PUBLIC ${Eigen3_DIRS} ${ENSENSO_INCLUDE_DIRS})
-  target_link_libraries(ensenso PUBLIC ${ENSENSO_LIBRARIES} ${OpenCV_LIBS} ros)
-
-  add_executable(ensenso_node src/ensenso/ensenso_node.cpp)
-  target_link_libraries(ensenso_node PRIVATE ${OpenCV_LIBS} ensenso ros)
-endif()
+#if(GRASPRO_BUILD_ENSENSO_NODE)
+#  add_library(ensenso src/ensenso/ensenso.cpp)
+#  target_include_directories(ensenso PUBLIC ${Eigen3_DIRS} ${ENSENSO_INCLUDE_DIRS})
+#  target_link_libraries(ensenso PUBLIC ${ENSENSO_LIBRARIES} ${OpenCV_LIBS} ros)
+#
+#  add_executable(ensenso_node src/ensenso/ensenso_node.cpp)
+#  target_link_libraries(ensenso_node PRIVATE ${OpenCV_LIBS} ensenso ros)
+#endif()
 
 
 if(GRASPRO_BUILD_REALSENSE_NODE)

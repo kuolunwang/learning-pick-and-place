@@ -4,4 +4,4 @@ string[] camera_suffixes
 
 ---
 
-bin_picking/OrthographicImage[] images
+OrthographicImage[] images

@@ -59,16 +59,17 @@ int Robot::restartMoveIt() {
 }
 
 bool Robot::recoverFromErrors() {
-  ac.waitForServer();
+  // ac.waitForServer();
 
-  franka_control::ErrorRecoveryGoal goal;
-  ac.sendGoal(goal);
+  // franka_control::ErrorRecoveryGoal goal;
+  // ac.sendGoal(goal);
 
-  bool success = ac.waitForResult(ros::Duration(5.0));
-  if (success) {
-    has_reflex_error = false;
-  }
-  return success;
+  // bool success = ac.waitForResult(ros::Duration(5.0));
+  // if (success) {
+  //   has_reflex_error = false;
+  // }
+  // return success;
+  return true;
 }
 
 bool Robot::moveJoints(const std::array<double, 7>& joint_values, MotionData& data) {
@@ -130,18 +131,18 @@ bool Robot::moveWaypointsPtp(const Affine& frame, const std::vector<Waypoint>& w
 
   bool execution_success {false};
   for (auto affine: affines) {
-    this->setPoseTarget(affine);
+    // this->setPoseTarget(affine);
 
-    if (this->plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS) {
-      this->stop();
-      this->is_moving = true;
-      auto execution = this->execute(my_plan);
-      this->is_moving = false;
-      execution_success = (execution == moveit::planning_interface::MoveItErrorCode::SUCCESS);
-    } else {
-      ROS_FATAL_STREAM("Error in planning motion");
-      return false;
-    }
+    // if (this->plan(my_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS) {
+    //   this->stop();
+    //   this->is_moving = true;
+    //   auto execution = this->execute(my_plan);
+    //   this->is_moving = false;
+    //   execution_success = (execution == moveit::planning_interface::MoveItErrorCode::SUCCESS);
+    // } else {
+    //   ROS_FATAL_STREAM("Error in planning motion");
+    //   return false;
+    // }
   }
 
   if (current_motion_data->break_callback && current_motion_data->did_break) {

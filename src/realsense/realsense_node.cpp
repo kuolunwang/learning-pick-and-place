@@ -7,8 +7,8 @@
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/image_encodings.h>
 
-#include <bin_picking/OrthographicImage.h>
-#include <bin_picking/GetOrthographicImages.h>
+#include <learning_pick_and_place/OrthographicImage.h>
+#include <learning_pick_and_place/GetOrthographicImages.h>
 #include <realsense/config.hpp>
 #include <realsense/realsense.hpp>
 
@@ -22,9 +22,9 @@ class RealsenseNode {
     return std::find(vector.begin(), vector.end(), element) != vector.end();
   }
 
-  bin_picking::OrthographicImage convert(const cv::Mat& image, RealsenseConfig config, const std::string& encoding, const std::string& suffix) {
+  learning_pick_and_place::OrthographicImage convert(const cv::Mat& image, RealsenseConfig config, const std::string& encoding, const std::string& suffix) {
     const sensor_msgs::ImagePtr image_ptr = cv_bridge::CvImage(std_msgs::Header(), encoding, image).toImageMsg();
-    bin_picking::OrthographicImage result;
+    learning_pick_and_place::OrthographicImage result;
     result.image = *image_ptr;
     result.pixel_size = config.pixel_size;
     result.min_depth = config.min_depth;
@@ -33,7 +33,7 @@ class RealsenseNode {
     return result;
   }
 
-  bool getImages(bin_picking::GetOrthographicImages::Request &req, bin_picking::GetOrthographicImages::Response &res) {
+  bool getImages(learning_pick_and_place::GetOrthographicImages::Request &req, learning_pick_and_place::GetOrthographicImages::Response &res) {
     if (req.camera_suffixes.empty()) {
       req.camera_suffixes = default_suffixes;
     }
