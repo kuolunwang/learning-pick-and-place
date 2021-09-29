@@ -140,16 +140,14 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # set the version of the realsense library
-ENV LIBREALSENSE_VERSION 2.36.0
-RUN wget https://github.com/IntelRealSense/librealsense/archive/v${LIBREALSENSE_VERSION}.tar.gz && \
-    tar -xvzf v${LIBREALSENSE_VERSION}.tar.gz && \
-    rm v${LIBREALSENSE_VERSION}.tar.gz && \
-    mkdir -p librealsense-${LIBREALSENSE_VERSION}/build && \
-    cd librealsense-${LIBREALSENSE_VERSION}/build && \
-    cmake .. && \
-    make && \
-    make install && \
-    rm -rf librealsense-${LIBREALSENSE_VERSION}
+ENV LIBREALSENSE_VERSION 2.48.0
+RUN cd ${HOME} && git clone https://github.com/IntelRealSense/librealsense.git \
+    && cd librealsense \
+    && git checkout v${LIBREALSENSE_VERSION} \
+    && mkdir build \
+    && cd build \
+    && cmake .. \
+    && make install
 
 ##################################### PIP3 ######################################
 
