@@ -9,6 +9,12 @@ import numpy as np
 import pymongo as pm
 from werkzeug.datastructures import ImmutableOrderedMultiDict
 
+import rospkg
+import os
+import sys
+r = rospkg.RosPack()
+sys.path.append(os.path.join(r.get_path("learning_pnp"), "scripts"))
+
 from actions.action import Action
 from config import Config
 from data.loader import Loader

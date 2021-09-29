@@ -7,8 +7,8 @@
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/image_encodings.h>
 
-#include <learning_pick_and_place/OrthographicImage.h>
-#include <learning_pick_and_place/GetOrthographicImages.h>
+#include <learning_pnp/OrthographicImage.h>
+#include <learning_pnp/GetOrthographicImages.h>
 #include <ensenso/config.hpp>
 #include <ensenso/ensenso.hpp>
 
@@ -22,9 +22,9 @@ class EnsensoNode {
     return std::find(vector.begin(), vector.end(), element) != vector.end();
   }
 
-  learning_pick_and_place::OrthographicImage convert(const cv::Mat& image, EnsensoConfig config, const std::string& encoding, const std::string& suffix) {
+  learning_pnp::OrthographicImage convert(const cv::Mat& image, EnsensoConfig config, const std::string& encoding, const std::string& suffix) {
     const sensor_msgs::ImagePtr image_ptr = cv_bridge::CvImage(std_msgs::Header(), encoding, image).toImageMsg();
-    learning_pick_and_place::OrthographicImage result;
+    learning_pnp::OrthographicImage result;
     result.image = *image_ptr;
     result.pixel_size = config.pixel_size;
     result.min_depth = config.min_depth;
@@ -33,7 +33,7 @@ class EnsensoNode {
     return result;
   }
 
-  bool getImages(learning_pick_and_place::GetOrthographicImages::Request &req, learning_pick_and_place::GetOrthographicImages::Response &res) {
+  bool getImages(learning_pnp::GetOrthographicImages::Request &req, learning_pnp::GetOrthographicImages::Response &res) {
     if (req.camera_suffixes.empty()) {
       req.camera_suffixes = default_suffixes;
     }

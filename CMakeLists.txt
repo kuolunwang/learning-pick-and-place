@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(learning-pick-and-place VERSION 0.1.0 LANGUAGES CXX)
+project(learning_pnp VERSION 0.1.0 LANGUAGES CXX)
 
 
 option(GRASPRO_BUILD_ENSENSO_NODE "Build ensenso node." ON)
